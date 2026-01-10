@@ -4,6 +4,11 @@ import LoginPage from "../auth/LoginPage";
 import Login from "../auth/Login/login";
 import Register from "../auth/Register/register";
 import DashboardPage from "../Protected/Dashboard/Page";
+
+
+import AuthRoute from "./AuthRouter";
+import ProtectedRouter from "./ProtectedRouter";
+
 export default function AppRouter(){
     return (
         <BrowserRouter>
@@ -11,12 +16,24 @@ export default function AppRouter(){
 
                 <Route path="/" element={<Navigate to="/login" replace />} />
 
-                {/* Route Login (wrap Login component with LoginPage layout) */}
-                <Route path="/login" element={<LoginPage><Login /></LoginPage>} />
-                <Route path="/register" element={<LoginPage><Register /></LoginPage>} />
+                {/* Auth Routes */}
+                <Route path="/login" element={
+                    <AuthRoute>
+                        <LoginPage><Login /></LoginPage>
+                    </AuthRoute>} />
+                <Route path="/register" element={
+                    <AuthRoute>
+                        <LoginPage><Register /></LoginPage>
+                    </AuthRoute>} />
 
+                {/* Protected Routes */}
                 {/* Other routers (kept as placeholders) */}
-                <Route path="/dashboard" element={<DashboardPage />} />
+                <Route path="/dashboard" element={
+                    <ProtectedRouter>
+                        <DashboardPage />
+                    </ProtectedRouter>} />
+
+                
                 {/* {UserRouter} */}
                 {/* {SellerRouter} */}
 
