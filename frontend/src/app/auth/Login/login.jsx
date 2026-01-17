@@ -11,9 +11,9 @@ export default function Login(){
         e.preventDefault();
         const res = await signIn(email, password);
         if (res?.error) {
-            console.error("Login failed:", res.error.message || res.error);
+            console.error("Login failed:", res.error.message ?? res.error);
         } else {
-            console.log("Login successful", res?.data || res);
+            console.log("Login successful", res?.data ?? res);
             navigate("/dashboard", {replace: true});
         }
     }

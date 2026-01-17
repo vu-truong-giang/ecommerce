@@ -9,3 +9,6 @@ api_router.include_router(
     tags=["Seller Products"]
 )
 
+@api_router.get("/me")
+def get_seller():
+    return {"msg": "seller profile"}

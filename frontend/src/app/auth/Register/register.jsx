@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Navigate, replace, useNavigate } from "react-router-dom";
+import { replace, useNavigate } from "react-router-dom";
 import { signUp } from "../../service/auth.services";
 
 export default function Register(){
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -10,10 +11,10 @@ export default function Register(){
         e.preventDefault();
         const res = await signUp(email, password);
         if (res?.error) {
-            console.error("Registration failed:", res.error.message || res.error);
+            console.error("Registration failed:", res.error.message ?? res.error);
         } else {
-            console.log("Registration successful", res?.data || res);
-            navigate("/login", replace=true);
+            console.log("Registration successful", res?.data ?? res);
+            navigate("/login", {replace: true});
         }
     }
     return (

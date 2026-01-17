@@ -6,7 +6,7 @@ export default function AuthRoute({ children }) {
   const { user, loading } = useAuth();
 
   if (loading) return <p>Loading...</p>;
-  if (user) return <Navigate to="/dashboard" replace />;
+  if (user) return <Navigate to="/Home" replace />;
 
   return children;
 }

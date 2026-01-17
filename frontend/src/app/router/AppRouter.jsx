@@ -3,9 +3,10 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "../auth/LoginPage";
 import Login from "../auth/Login/login";
 import Register from "../auth/Register/register";
-import DashboardPage from "../Protected/Dashboard/Page";
-
-
+import DashboardPage from "../Protected/seller/Dashboard/Page";
+import HomePage from "../Protected/user/Home/Page";
+import ProfilePage from "../Protected/user/Profile/Page";
+import  UserLayout from "../Protected/user/Layout";
 import AuthRoute from "./AuthRouter";
 import ProtectedRouter from "./ProtectedRouter";
 
@@ -28,11 +29,16 @@ export default function AppRouter(){
 
                 {/* Protected Routes */}
                 {/* Other routers (kept as placeholders) */}
-                <Route path="/dashboard" element={
-                    <ProtectedRouter>
-                        <DashboardPage />
-                    </ProtectedRouter>} />
+                
 
+                <Route element ={
+                    <ProtectedRouter>
+                        <UserLayout />
+                    </ProtectedRouter>
+                }>
+                    <Route path="/Home" element={<HomePage />} />
+                    <Route path="/profile" element={<ProfilePage />} />
+                </Route>
                 
                 {/* {UserRouter} */}
                 {/* {SellerRouter} */}
