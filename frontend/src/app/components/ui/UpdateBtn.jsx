@@ -1,10 +1,24 @@
-import React from "react";
+import React, { use } from "react";
 import { updateUserProfile } from "../../service/user.services";
 import { useNavigate } from "react-router-dom";
+import { uploadAvatar } from "../../service/avatar.services";
 
 export default function UpdateBtn({ userId, profileData }) {
 const navigate = useNavigate();
   const handleUpdate = async () => {
+    if (profileData.avatarFile) {
+      try {
+        const res = await uploadAvatar(userId, profileData.avatarFile);
+        console.log("Avatar Upload Response:", res);
+        profileData.avatar = res; 
+
+      } catch (err){
+        console.error("Avatar upload failed:", err);
+        alert(`Avatar upload failed: ${err.message || err}`);
+        return ;
+      }
+
+    }
     try {
       const res = await updateUserProfile(userId, profileData);
       console.log("Update Response:", res);
